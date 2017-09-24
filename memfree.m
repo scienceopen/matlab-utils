@@ -2,11 +2,7 @@
 % currently Matlab doesn't support memory() on Linux/Mac systems
 % This function is meant to give free memory using Matlab or Octave
 %
-% This function works on:
-% Windows: Matlab, Octave with or without Cygwin
-% Linux:   Matlab, Octave
-% Android: untested
-% Mac: untested
+% It demonstrates using Python from Matlab/Octave seamlessly.
 %
 % Output:
 % --------
