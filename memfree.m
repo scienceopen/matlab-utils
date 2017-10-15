@@ -14,19 +14,9 @@ function freebytes = memfree()
 
 try
     freebytes = double(py.psutil.virtual_memory().available);
-    meth='py.psutil';
 catch
     [err,freebytes]=system('python -c "import psutil; print(psutil.virtual_memory().available)"');
-    if ~err
-        freebytes=str2double(freebytes);
-        meth='python psutil';
-    else
-        error('Python psutil not found.')
-    end
+    freebytes=str2double(freebytes);
 end
 
-%%
-disp([num2str(freebytes/1e9,'%0.2f'),' Gbyte available RAM via ',meth])
-
-if ~nargout,clear,end
 end %function
