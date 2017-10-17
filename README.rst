@@ -2,4 +2,9 @@
 Matlab Utilities
 ================
 
-Matlab/Octave OS detection, free memory estimation, and vmstat log parsing
+Utilities for Matlab/Octave:
+
+* OS detection
+* free memory estimation
+* disk free space
+* VMstat log parsing
