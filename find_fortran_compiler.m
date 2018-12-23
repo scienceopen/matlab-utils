@@ -1,3 +1,5 @@
+%!assert(ischar(find_fortran_compiler()))
+
 function fc = find_fortran_compiler(FC)
 %% Find Fortran compiler
 % intended for Fortran 2008+ compilers
@@ -24,7 +26,7 @@ else
 end
 
 if ~isempty(FC)
-    FCs = [{FC},FCs];
+  FCs = [{FC},FCs];
 end
 
 fstem = tempname;
@@ -43,9 +45,11 @@ for i = 1:length(FCs)
   
   [stat, msg] = system(rfn);
   if stat == 0
-      disp(msg)
-      return
+    disp(msg)
+    return
   end
 end
+
+if stat ~= 0, fc = ''; end
 
 end

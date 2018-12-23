@@ -1,3 +1,4 @@
+%!assert(islogical(iscygwin))
 function iscyg = iscygwin()
 persistent cyg;
 

@@ -31,7 +31,7 @@ while ~feof(fid)
     c = fgetl(fid);
     c = textscan(c, formatSpec, 'Delimiter',' ','multipledelimsasOne',true);
     data(i,:) = cell2mat(c);
-    if ~mod(i,1000), display([int2str(i),' lines read']), end
+    if ~mod(i,1000), disp([int2str(i),' lines read']), end
 end
 
 %single for plotting

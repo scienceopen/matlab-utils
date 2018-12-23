@@ -1,3 +1,4 @@
+%!assert(ischar(expanduser('~')))
 function expanded = expanduser(p)
 %%
 % For now, handles only a leading tilde, does not currently handle specifying ~otheruser
