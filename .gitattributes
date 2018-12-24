@@ -1,4 +1,5 @@
-*.m linguist-language=Matlab
+
+colormaps/* linguist-generated
 
 .gitattributes text eol=lf
 .gitignore text eol=lf
