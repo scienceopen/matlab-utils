@@ -4,8 +4,10 @@
 % replace error('test error') with your top-level CI script
 %
 % for CI run like
-% * Cctave:  octave-cli -q --eval errorret
-% * Matlab:  matlab -nojvm -r errorret
+% * Octave:  octave-cli -q --eval errorret
+% * Matlab:  matlab -batch errorret
+
+% This technique is NO LONGER NECESSARY for Matlab >= R2019a
 
 try
   error('test error')
