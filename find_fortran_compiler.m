@@ -13,7 +13,7 @@ function fc = find_fortran_compiler(FC)
 %  Michael Hirsch, Ph.D.
 
 % stops upon finding first working Fortran compiler
-FCs = {'gfortran', 'ifort', 'flang', 'pgf95', 'nagfor', ...
+FCs = {'gfortran', 'ifort', 'flang', 'pgfortran', 'nagfor', ...
        'ftn', ... % Cray
        'xlf2008', ... % IBM XL
        'f95', ... % Absoft
@@ -33,7 +33,7 @@ fstem = tempname;
 fn = [fstem, '.f90'];
 rfn = [fstem, '.exe'];
 
-prog = 'program a; use iso_fortran_env; print *,compiler_version(); end';
+prog = 'use iso_fortran_env; print *,compiler_version(); end program';
 fid = fopen(fn, 'wt');
 fprintf(fid, '%s\n', prog);
 fclose(fid);

@@ -1,18 +1,11 @@
-%!assert(diskfree('~')>0)
-
 function freebytes = diskfree(mydir)
 %% returns disk free space in bytes
 % example:  diskfree('~')
+% for the Matlab-Python connection, must have first done one-time Python setup:
+%   https://github.com/scivision/matlab2python
 
-validateattributes(mydir, {'char'}, {'vector'},mfilename,'drive letter to get free space from',1)
+validateattributes(mydir, {'char'}, {'scalartext'}, mfilename, 'drive letter to get free space from', 1)
 
-try
-  freebytes = double(py.shutil.disk_usage(py.os.path.expanduser(mydir)).free);
-catch
-  mydir = ["'",mydir,"'"];
-  cmd = ['python -c "import os,shutil; print(shutil.disk_usage(os.path.expanduser(',mydir,')).free)"'];
-  [err, free] = system(cmd);
-  freebytes = str2double(free);
+freebytes = int64(py.shutil.disk_usage(py.pathlib.Path(mydir).expanduser().resolve()).free);
+
 end
-
-end %function
