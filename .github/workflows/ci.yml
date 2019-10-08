@@ -1,0 +1,24 @@
+name: ci
+
+on:
+  push:
+    paths-ignore:
+    - "**/*.md"
+  pull_request:
+    paths-ignore:
+    - "**/*.md"
+
+jobs:
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+    - run: sudo apt install -yq --no-install-recommends gfortran octave
+    - run: pip install -e .[tests,lint]
+    - run: flake8
+    - run: mypy .
+    - run: octave --eval "runtests('.')"

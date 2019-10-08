@@ -13,7 +13,7 @@ git:
 addons:
   apt:
 #    sources: ubuntu-toolchain-r-test
-    packages: 
+    packages:
     - octave
     - gfortran
 

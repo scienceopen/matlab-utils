@@ -1,6 +1,8 @@
-[![Build Status](https://travis-ci.com/scivision/matlab-octave-utils.svg?branch=master)](https://travis-ci.com/scivision/matlab-octave-utils)
 
-# Matlab Utilities
+[![Actions Status](https://github.com/scivision/matlab-octave-utils/workflows/ci/badge.svg)](https://github.com/scivision/matlab-octave-utils/actions)
+
+
+# Matlab and GNU Octave Utilities
 
 Utilities for Matlab/Octave:
 
