@@ -2,23 +2,27 @@ name: ci
 
 on:
   push:
-    paths-ignore:
-    - "**/*.md"
+    paths:
+    - "*.m"
+    - "*.py"
   pull_request:
-    paths-ignore:
-    - "**/*.md"
+    paths:
+    - "*.m"
+    - "*.py"
 
 jobs:
 
   linux:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - uses: actions/setup-python@v1
       with:
         python-version: '3.x'
-    - run: sudo apt install -yq --no-install-recommends gfortran octave
-    - run: pip install -e .[tests,lint]
+    - run: |
+        sudo apt -yq update
+        sudo apt install -yq --no-install-recommends gfortran octave
+    - run: pip install .[tests,lint]
     - run: flake8
     - run: mypy .
     - run: octave --eval "runtests('.')"
