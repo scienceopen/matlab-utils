@@ -6,9 +6,7 @@ on:
     - "*.m"
     - "*.py"
   pull_request:
-    paths:
-    - "*.m"
-    - "*.py"
+  release:
 
 jobs:
 
