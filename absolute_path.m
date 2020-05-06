@@ -4,6 +4,8 @@ function abspath = absolute_path(path)
 %
 % NOTE: GNU Octave is weaker at this, especially if /foo/bar/../baz and "bar"
 % doesn't exist, it may just return the input unmodified.
+%
+% Copyright (c) 2020 Michael Hirsch (MIT License)
 
 narginchk(1,1)
 % have to expand ~ first

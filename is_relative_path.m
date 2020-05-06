@@ -1,5 +1,7 @@
 function isrel = is_relative_path(path)
 %% detect if a path is relative
+%
+% Copyright (c) 2020 Michael Hirsch (MIT License)
 
 isrel = strcmp(path(1), '.');
 if isrel, return, end

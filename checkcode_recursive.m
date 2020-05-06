@@ -1,6 +1,8 @@
 function results = checkcode_recursive(folder, verbose)
 %% lints each Matlab .m file in folder.
 % distinct from mlintrpt() in that this function is all CLI instead of GUI
+%
+% Copyright (c) 2020 Michael Hirsch (MIT License)
 
 narginchk(0,2)
 if nargin < 1, folder = pwd; end
