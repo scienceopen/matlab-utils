@@ -29,6 +29,8 @@ for i = 1:N
   end
 end % for
 
+close(h);
+
 if ~nargout, clear('results'), end
 
 end % function
