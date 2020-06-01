@@ -3,6 +3,7 @@ function isrel = is_relative_path(path)
 %
 % Copyright (c) 2020 Michael Hirsch (MIT License)
 
+narginchk(1,1)
 isrel = strcmp(path(1), '.');
 if isrel, return, end
 
