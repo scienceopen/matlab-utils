@@ -7,6 +7,8 @@ function ret = is_folder(path)
 % there doesn't appear to be a solution besides renaming this function.
 narginchk(1,1)
 
+path = expanduser(path);
+
 if exist('isfolder', 'builtin') == 5 || exist('isfolder', 'file') == 2
   ret = isfolder(path);
 else

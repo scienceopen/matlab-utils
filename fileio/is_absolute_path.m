@@ -1,18 +1,19 @@
-function isrel = is_relative_path(path)
-%% detect if a path is relative
-%
-% Copyright (c) 2020 Michael Hirsch (MIT License)
+function isrel = is_absolute_path(path)
+%% true if path is absolute. Path need not yet exist.
 
 narginchk(1,1)
-isrel = strcmp(path(1), '.');
-if isrel, return, end
 
-isrel = ~contains(path, {filesep, '/'});
-if isrel, return, end
+path = expanduser(path);
+% both matlab and octave need expanduser
 
-isrel =  isletter(path(1)) && ~strcmp(path(2), ':');
-
+if isoctave
+  isrel = is_absolute_filename(path);
+else
+  % can't use -nojvm
+  isrel = java.io.File(path).isAbsolute();
 end
+
+end % function
 
 % Copyright 2020 Michael Hirsch, Ph.D.
 

@@ -7,10 +7,16 @@ function ret = is_file(path)
 % there doesn't appear to be a solution besides renaming this function.
 narginchk(1,1)
 
-if exist('isfile', 'builtin') == 5 || exist('isfile', 'file') == 2
+path = expanduser(path);
+
+try
   ret = isfile(path);
-else
-  ret = exist(path, 'file') == 2;
+catch excp
+  if any(strcmp(excp.identifier, {'MATLAB:UndefinedFunction', 'Octave:undefined-function'}))
+    ret = exist(path, 'file') == 2;
+  else
+    rethrow(excp)
+  end
 end
 
 end % function
