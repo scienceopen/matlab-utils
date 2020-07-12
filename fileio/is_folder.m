@@ -9,9 +9,12 @@ narginchk(1,1)
 
 path = expanduser(path);
 
-if exist('isfolder', 'builtin') == 5 || exist('isfolder', 'file') == 2
+try
   ret = isfolder(path);
-else
+catch excp
+  if ~any(strcmp(excp.identifier, {'MATLAB:UndefinedFunction', 'Octave:undefined-function'}))
+    rethrow(excp)
+  end
   ret = exist(path, 'dir') == 7;
 end
 
