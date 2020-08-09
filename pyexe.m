@@ -7,11 +7,6 @@ try %#ok<*TRYNC>
   exe = char(env.Executable);
   return
 end
-%% Matlab <= R2019a
-try
-  [~, exe] = pyversion();
-  if ~isempty(exe), return, end
-end
 %% plain Python
 version_test_str = ['python -c "import sys; print(sys.version_info >= (3, 6), end=', "''", ')"'];
 exe_loc_str = ['python -c "import sys; print(sys.executable, end=', "''", ')"'];
