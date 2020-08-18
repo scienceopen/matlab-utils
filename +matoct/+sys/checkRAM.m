@@ -14,7 +14,7 @@ validateattributes(myclass, {'char'}, {'vector'}, mfilename, "input variable cla
 
 OK = false;
 %% get available RAM
-freebytes = memfree();
+freebytes = matoct.sys.memfree();
 %% variable sizing
 switch(myclass)
   case {'single','int32','uint32'}

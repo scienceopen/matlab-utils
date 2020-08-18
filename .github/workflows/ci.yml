@@ -26,4 +26,4 @@ jobs:
     - run: flake8
     - run: mypy .
 
-    - run: octave --eval "runtests('.')"
+    - run: octave --eval "matoct.tests.test_unit"

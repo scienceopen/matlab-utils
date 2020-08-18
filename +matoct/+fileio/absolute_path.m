@@ -3,7 +3,7 @@ function abspath = absolute_path(path)
 % path need not exist, but absolute path is returned
 %
 % NOTE: some network file systems are not resolvable by Matlab Java
-% subsystem, but are sometimes still valid--so we warn and return
+% subsystem, but are sometimes still valid--so return
 % unmodified path if this occurs.
 %
 % NOTE: GNU Octave is weaker at this.
@@ -12,28 +12,30 @@ function abspath = absolute_path(path)
 %
 % Copyright (c) 2020 Michael Hirsch (MIT License)
 
+import matoct.fileio.*
+
 narginchk(1,1)
 
 % have to expand ~ first
 path = expanduser(path);
 
-if isoctave
+if matoct.sys.isoctave
   abspath = make_absolute_filename(path);
 else
   if ~is_absolute_path(path)
-    % otherwise the default is Documents/Matlab
-    % which is probably not wanted.
+    % otherwise the default is Documents/Matlab, which is probably not wanted.
     path = fullfile(pwd, path);
   end
+  if ~usejava('jvm')
+    abspath = path;
+    return
+  end
+
   try
     abspath = char(java.io.File(path).getCanonicalPath());
   catch
-    % fprintf(2, 'could not make absolute path from %s\n', path)
     abspath = path;
   end
 end
-
-% debugging
-% disp([path, ' => ',abspath])
 
 end % function

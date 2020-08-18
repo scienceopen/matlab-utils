@@ -42,7 +42,7 @@ for i = 1:length(FCs)
   fc = FCs{i};
   [stat, ~] = system([fc, ' ', fn, ' -o',rfn]);  % gobble error messages
   if stat ~= 0, continue, end
-  
+
   [stat, msg] = system(rfn);
   if stat == 0
     disp(msg)

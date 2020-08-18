@@ -29,7 +29,7 @@ end
 
 validateattributes(p, {'char'}, {'vector'})
 %% GNU Octave
-if isoctave
+if matoct.sys.isoctave
   expanded = tilde_expand(p);
   return
 end
@@ -47,8 +47,13 @@ if strcmp(expanded(1), '~')
   end
 
   if isempty(home)
-    % this is 100x slower than getenv() on Matlab R2020a
-    home = char(java.lang.System.getProperty("user.home"));
+    if usejava('jvm')
+      % this is 100x slower than getenv() on Matlab R2020a
+      home = char(java.lang.System.getProperty("user.home"));
+    else
+      % return unmodified
+      return
+    end
   end
 
   expanded = fullfile(home, expanded(2:end));

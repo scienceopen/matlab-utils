@@ -3,10 +3,10 @@ function copy_file(in, out)
 % distinction: copy_file "out" must be directory.
 narginchk(2,2)
 
-fin = absolute_path(in);
-fout = absolute_path(out);
+fin = matoct.fileio.absolute_path(in);
+fout = matoct.fileio.absolute_path(out);
 
-if ~is_folder(fout)
+if ~isfolder(fout)
   error('copyfile:file_not_found', '%s is not a directory', fout)
 end
 

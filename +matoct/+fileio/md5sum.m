@@ -1,10 +1,14 @@
 function hash = md5sum(file)
 % compute MD5 hash of file
 
-assert(is_file(file), '%s not found', file)
+narginchk(1,1)
+
+file = matoct.fileio.expanduser(file);
+
+assert(isfile(file), '%s not found', file)
 
 hash = [];
-if isoctave
+if matoct.sys.isoctave
   return
 else
   if verLessThan('matlab', '9.7')
@@ -15,7 +19,7 @@ else
     return
   end
   h = py.hashlib.md5();
-  h.update(py.pathlib.Path(file).read_bytes())
+  h.update(py.open(file, 'rb').read())
   hash = char(h.hexdigest());
 end
 

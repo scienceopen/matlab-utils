@@ -4,10 +4,10 @@
 % nohup vmstat --one-header 15 >> ~/logs/load.log&
 %
 % e.g. for Raspberry Pi. Don't let it run forever or you'll fill up the storage.
-% 
+%
 % tested with Octave 4.0 and Matlab R2015b
-% 
-% Michael Hirsch 
+%
+% Michael Hirsch
 % July 2013
 
 function data = loadingLog(logfn,cadenceSec)
@@ -69,9 +69,6 @@ st = data(:,17);
 
 avail = free+buffer+cache;
 %% plot
-try %octave 4.0 is buggy on these plots, with fltk and gnuplot, but gnuplot is less bac (xlabeltick doubling)
-  graphics_toolkit('gnuplot') 
-end
 
 try
     figure(1),clf(1)
@@ -108,7 +105,7 @@ try
     ylabel('blocks/sec')
 %    set(gca,'ylim',[0,inf],'xgrid','on')
 end
-    
+
 try
     figure(3),clf(3)
     ax=plotyy(t,in,t,cs);

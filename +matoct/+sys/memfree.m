@@ -11,15 +11,19 @@ function freebytes = memfree()
 % --------
 % free physical RAM [bytes]
 %
-% If Python psutils not available, returns NaN
+% If Python psutils not available, returns -1
 %
 % Michael Hirsch, Ph.D.
 
 try
   freebytes = double(py.psutil.virtual_memory().available);
 catch
-  [~,freebytes] = system('python -c "import psutil; print(psutil.virtual_memory().available)"');
-  freebytes = str2double(freebytes);
+  try
+    [~,freebytes] = system('python -c "import psutil; print(psutil.virtual_memory().available)"');
+    freebytes = str2double(freebytes);
+  catch
+    freebytes = -1;
+  end
 end
 
 end %function

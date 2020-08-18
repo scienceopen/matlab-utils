@@ -5,7 +5,7 @@ function isinter = isinteractive()
 persistent inter;
 
 if isempty(inter)
-  if isoctave
+  if matoct.sys.isoctave
     inter = isguirunning;
   else
     % matlab, this test doesn't work for Octave
