@@ -12,17 +12,15 @@ function abspath = absolute_path(path)
 %
 % Copyright (c) 2020 Michael Hirsch (MIT License)
 
-import matoct.fileio.*
-
 narginchk(1,1)
 
 % have to expand ~ first
-path = expanduser(path);
+path = matoct.fileio.expanduser(path);
 
 if matoct.sys.isoctave
-  abspath = make_absolute_filename(path);
+  abspath = matoct.fileio.make_absolute_filename(path);
 else
-  if ~is_absolute_path(path)
+  if ~matoct.fileio.is_absolute_path(path)
     % otherwise the default is Documents/Matlab, which is probably not wanted.
     path = fullfile(pwd, path);
   end
