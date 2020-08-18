@@ -50,7 +50,9 @@ function is_p = is_painters(h)
 
 if isa(h,'matlab.ui.Figure')
   h = get(h, 'children');
-  h = h(1);
+  if length(h) > 1
+    h = h(1);
+  end
 end
 
 try
