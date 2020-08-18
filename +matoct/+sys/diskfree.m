@@ -3,7 +3,7 @@ function freebytes = diskfree(mydir)
 % example:  diskfree('~')
 
 narginchk(1,1)
-validateattributes(mydir, {'char'}, {'scalartext'}, mfilename, 'drive letter to get free space from', 1)
+validateattributes(mydir, {'char'}, {'vector'}, mfilename, 'drive letter to get free space from', 1)
 
 mydir = matoct.fileio.expanduser(mydir);
 
