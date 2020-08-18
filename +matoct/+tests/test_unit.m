@@ -9,7 +9,10 @@ matoct.fileio.copy_file(f1, tempdir)
 %% checkRAM
 assert(islogical(matoct.sys.checkRAM(1)))
 %% diskfree
-assert(matoct.sys.diskfree('~')>0)
+assert(isnumeric(matoct.sys.diskfree('~')))
+if ~matoct.sys.isoctave
+  assert(matoct.sys.diskfree('~') > 0, 'diskfree')
+end
 %% expanduser
 assert(ischar(matoct.fileio.expanduser('~')))
 %% md5sum
