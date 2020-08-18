@@ -30,9 +30,11 @@ assert(isnumeric(matoct.sys.memfree))
 %% isinteractive
 assert(islogical(matoct.sys.isinteractive))
 %% exportgraphics
+if ~matoct.sys.isoctave
 h = figure('visible',false);
 plot(1)
 fn = [tempname, '.png'];
 matoct.vis.export_graphics(h, fn)
 close(h)
 assert(isfile(fn))
+end
