@@ -7,7 +7,7 @@ file = matoct.fileio.expanduser(file);
 
 assert(isfile(file), '%s not found', file)
 
-hash = [];
+hash = '';
 if matoct.sys.isoctave
   return
 else
@@ -15,7 +15,7 @@ else
     return
   end
   p = pyenv();
-  if isempty(p.Version) % Python not configured
+  if length(p.Version) <= 1 % Python not configured
     return
   end
   h = py.hashlib.md5();
