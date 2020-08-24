@@ -7,7 +7,7 @@ path = matoct.fileio.expanduser(path);
 % Must expanduser() before Java
 
 if matoct.sys.isoctave
-  isabs = matoct.fileio.is_absolute_filename(path);
+  isabs = is_absolute_filename(path);
 elseif usejava('jvm')
   isabs = java.io.File(path).isAbsolute();
 elseif ispc

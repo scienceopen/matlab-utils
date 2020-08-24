@@ -1,4 +1,3 @@
-%!assert(ischar(absolute_path('~')))
 function abspath = absolute_path(path)
 % path need not exist, but absolute path is returned
 %
@@ -18,22 +17,23 @@ narginchk(1,1)
 path = matoct.fileio.expanduser(path);
 
 if matoct.sys.isoctave
-  abspath = matoct.fileio.make_absolute_filename(path);
-else
-  if ~matoct.fileio.is_absolute_path(path)
-    % otherwise the default is Documents/Matlab, which is probably not wanted.
-    path = fullfile(pwd, path);
-  end
-  if ~usejava('jvm')
-    abspath = path;
-    return
-  end
+  abspath = make_absolute_filename(path);
+  return
+end
 
-  try
-    abspath = char(java.io.File(path).getCanonicalPath());
-  catch
-    abspath = path;
-  end
+if ~matoct.fileio.is_absolute_path(path)
+  % otherwise the default is Documents/Matlab, which is probably not wanted.
+  path = fullfile(pwd, path);
+end
+if ~usejava('jvm')
+  abspath = path;
+  return
+end
+
+try
+  abspath = char(java.io.File(path).getCanonicalPath());
+catch
+  abspath = path;
 end
 
 end % function

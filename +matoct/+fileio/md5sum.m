@@ -8,20 +8,19 @@ file = matoct.fileio.expanduser(file);
 assert(isfile(file), '%s not found', file)
 
 hash = '';
-if matoct.sys.isoctave
+
+if matoct.sys.isoctave || verLessThan('matlab', '9.7')
   return
-else
-  if verLessThan('matlab', '9.7')
-    return
-  end
-  p = pyenv();
-  if length(p.Version) <= 1 % Python not configured
-    return
-  end
-  h = py.hashlib.md5();
-  h.update(py.open(file, 'rb').read())
-  hash = char(h.hexdigest());
 end
+
+p = pyenv();
+if length(p.Version) <= 1
+% Python not configured. Not isempty()!
+  return
+end
+h = py.hashlib.md5();
+h.update(py.open(file, 'rb').read())
+hash = char(h.hexdigest());
 
 %% sanity check
 assert(length(hash)==32, 'md5 hash is 32 characters')
