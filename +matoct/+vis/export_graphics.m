@@ -13,9 +13,9 @@ if matoct.version_atleast(version, '9.8.0.1451342')
 end
 
 if nargin >= 4 && strcmpi(varargin{1}, 'resolution')
-dpi = ['-r', int2str(varargin{2})];
+  dpi = ['-r', int2str(varargin{2})];
 else
-dpi = [];
+  dpi = [];
 end
 [~,~,ext] = fileparts(filename);
 flag = printflag(ext(2:end));
