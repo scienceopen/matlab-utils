@@ -1,33 +1,25 @@
-function export_graphics(varargin)
-% Matlab R2020a brought exportgraphics(), which looks great, but
-% fail to render under several conditions relevant to HPC:
+function export_graphics(handle, filename, varargin)
+% Matlab R2020a brought exportgraphics(), which looks great.
+% use R2020a Update 5 to avoid bug:
 % https://www.mathworks.com/support/bugreports/details/2195498
-% Until this bug is fixed, we use next best factory print() function
-%
-% Bug description: any of these triggers R2020a exportgraphics bug:
-% 1. The Renderer property of the figure is set to 'painters'
-% 2. call the exportgraphics or copygraphics function inside a parfor loop
-% 3. start MATLAB session with the -nodisplay option
 
 narginchk(2,inf)
 
-use_print = verLessThan('matlab', '9.8') || ...
-            ~matoct.sys.isinteractive || ...
-            is_painters(varargin{1}) || ...
-            matoct.sys.is_parallel_worker;
+use_print = ~matoct.version_atleast(version, '9.8.0.1451342');
+filename = matoct.fileio.expanduser(filename);
 
 if use_print
-  if nargin >= 4 && strcmpi(varargin{3}, 'resolution')
-    dpi = ['-r', int2str(varargin{4})];
+  if nargin >= 4 && strcmpi(varargin{1}, 'resolution')
+    dpi = ['-r', int2str(varargin{2})];
   else
     dpi = [];
   end
-  [~,~,ext] = fileparts(varargin{2});
+  [~,~,ext] = fileparts(filename);
   flag = printflag(ext(2:end));
   % legacy figure saving function
-  print(varargin{1}, flag, varargin{2}, dpi)
+  print(handle, flag, filename, dpi)
 else
-  exportgraphics(varargin{:})
+  exportgraphics(handle, filename, varargin{:})
 end
 
 end % function
@@ -44,20 +36,3 @@ switch fmt
 end
 
 end % function
-
-
-function is_p = is_painters(h)
-
-if isa(h,'matlab.ui.Figure')
-  h = get(h, 'children');
-  if length(h) > 1
-    h = h(1);
-  end
-end
-
-try
-  is_p = contains(rendererinfo(h).GraphicsRenderer, 'Painters');
-catch
-  is_p = true;  % failsafe
-end
-end
