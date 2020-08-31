@@ -1,4 +1,3 @@
-%!assert(islogical(isinteractive))
 function isinter = isinteractive()
 %% tell if the program is being run interactively or not.
 
