@@ -8,7 +8,7 @@ if isempty(wsl)
     fid = fopen('/proc/version');
     v = fscanf(fid,'%s');
     fclose(fid);
-    wsl = ~isempty(strfind(v,'Microsoft')); %#ok<STREMP>  % contains() not in octave
+    wsl = contains(v, 'Microsoft'); % contains() not in octave
   else
     wsl = false;
   end

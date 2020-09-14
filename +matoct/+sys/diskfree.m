@@ -1,19 +1,14 @@
-function freebytes = diskfree(mydir)
+function freebytes = diskfree(direc)
 %% returns disk free space in bytes
 % example:  diskfree('~')
-
-narginchk(1,1)
-validateattributes(mydir, {'char'}, {'vector'}, mfilename, 'drive letter to get free space from', 1)
-
-if matoct.sys.isoctave
-    freebytes = -1;
-    return
+arguments
+  direc (1,1) string
 end
 
-mydir = matoct.fileio.expanduser(mydir);
+direc = matoct.fileio.expanduser(direc);
 
-assert(isfolder(mydir), '%s is not a folder', mydir)
+assert(isfolder(direc), '%s is not a folder', direc)
 
-freebytes = java.io.File(mydir).getUsableSpace;
+freebytes = java.io.File(direc).getUsableSpace;
 
 end

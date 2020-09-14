@@ -5,14 +5,11 @@ function [OK,newSizeBytes,freebytes] = checkRAM(newSize, myclass)
 % create an array using ALL available RAM, but at least you know when you
 % certainly CAN'T create an array without digging deep into swap or worse.
 
-
-%%
-if nargin<2 || isempty(myclass)
-  myclass = 'double';
+arguments
+  newSize (1,:) {mustBeNumeric}
+  myclass (1,1) string = "double"
 end
-validateattributes(myclass, {'char'}, {'vector'}, mfilename, "input variable class as character", 2)
 
-OK = false;
 %% get available RAM
 freebytes = matoct.sys.memfree();
 %% variable sizing
@@ -29,13 +26,11 @@ switch(myclass)
     bits = 1;
   case {'string','char'}
     bits = 8; % FIXME is this correct?
-  otherwise, error(['unhandled variable class: ', myclass])
+  otherwise, error('unhandled variable class: %s', myclass)
 end
 
 newSizeBytes = prod(newSize)*bits / 8;
 
-if newSizeBytes < freebytes
-    OK = true;
-end
+OK = newSizeBytes < freebytes;
 
 end
