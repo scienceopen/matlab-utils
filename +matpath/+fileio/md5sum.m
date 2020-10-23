@@ -4,11 +4,13 @@ arguments
   file (1,1) string
 end
 
-file = matoct.fileio.expanduser(file);
+import matpath.fileio.expanduser
+
+file = expanduser(file);
 
 assert(isfile(file), '%s not found', file)
 
-hash = "";
+hash = string.empty;
 
 if verLessThan('matlab', '9.7')
   return

@@ -11,7 +11,7 @@ arguments
 end
 
 %% get available RAM
-freebytes = matoct.sys.memfree();
+freebytes = matpath.sys.memfree();
 %% variable sizing
 switch(myclass)
   case {'single','int32','uint32'}

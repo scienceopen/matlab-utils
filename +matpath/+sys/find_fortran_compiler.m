@@ -22,7 +22,7 @@ FCs = ["gfortran", "ifort", "flang", "nvfortran", "nagfor", ...
        "f95", ... % Absoft
       ];
 
-if ~isempty(FC)
+if strlength(FC) > 0
   FCs = [FC, FCs];
 end
 

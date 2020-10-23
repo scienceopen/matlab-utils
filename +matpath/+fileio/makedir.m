@@ -5,7 +5,9 @@ arguments
   direc (1,1) string
 end
 
-direc = matoct.fileio.expanduser(direc);
+import matpath.fileio.expanduser
+
+direc = expanduser(direc);
 
 if isfolder(direc), return, end
 
