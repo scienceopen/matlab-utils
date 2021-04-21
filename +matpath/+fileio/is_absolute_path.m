@@ -8,12 +8,10 @@ arguments
   apath string
 end
 
-import matpath.fileio.expanduser
-
-apath = expanduser(apath);
+apath = matpath.fileio.expanduser(apath);
 
 if ispc
-  i = strlength(apath) < 2;
+  i = strlength(apath) < 3;
   isabs(i) = false;
 
   hasDrive = cell2mat(isstrprop(extractBefore(apath(~i), 2), "alpha", "ForceCellOutput", true));

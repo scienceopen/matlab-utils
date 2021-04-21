@@ -5,16 +5,12 @@ arguments
   direc (1,1) string
 end
 
-import matpath.fileio.expanduser
-
-direc = expanduser(direc);
+direc = matpath.fileio.expanduser(direc);
 
 if isfolder(direc), return, end
 
 mkdir(direc);
 
-if ~isfolder(direc)
-  error('makedir:not_a_directory', 'not a directory %s', direc)
-end
+assert(isfolder(direc), 'not a directory %s', direc)
 
 end

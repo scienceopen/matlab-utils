@@ -6,10 +6,8 @@ arguments
   out (1,1) string
 end
 
-import matpath.fileio.expanduser
-
-in = expanduser(in);
-out = expanduser(out);
+in = matpath.fileio.expanduser(in);
+out = matpath.fileio.expanduser(out);
 
 try
   copyfile(in, out);
