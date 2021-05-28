@@ -14,18 +14,12 @@ end
 freebytes = matpath.sys.memfree();
 %% variable sizing
 switch(myclass)
-  case {'single','int32','uint32'}
-    bits = 32;
-  case {'double','int64','uint64','float'}
-    bits = 64;
-  case {'int16','uint16'}
-    bits = 16;
-  case {'int8','uint8'}
-    bits = 8;
-  case {'logical','bool'}
-    bits = 1;
-  case {'string','char'}
-    bits = 8; % FIXME is this correct?
+  case {'single','int32','uint32'}, bits = 32;
+  case {'double','int64','uint64','float'}, bits = 64;
+  case {'int16','uint16'}, bits = 16;
+  case {'int8','uint8'}, bits = 8;
+  case {'logical','bool'}, bits = 1;
+  case {'string','char'}, bits = 8; % FIXME is this correct?
   otherwise, error('unhandled variable class: %s', myclass)
 end
 

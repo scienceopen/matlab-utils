@@ -1,4 +1,3 @@
-
 # Matlab Utilities
 
 * checkcode_recursive.m: run `checkcode` recursively on folders and subfolders (Matlab-only)
