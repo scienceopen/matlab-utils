@@ -69,6 +69,28 @@ matpath.fileio.makedir(d)
 tc.assertTrue(isfolder(d))
 end
 
+function test_which(tc)
+
+tc.verifyEmpty(matpath.fileio.which(string.empty))
+
+n = "matlab";
+% assumes Matlab in environment variable PATH
+tc.assumeNotEmpty(matpath.fileio.which(n))
+
+p = fullfile(matlabroot, "bin", n);
+
+% full absolute path
+exe = matpath.fileio.which(p);
+
+if ispc
+  tc.verifyTrue(endsWith(exe, ".exe"))
+else
+  tc.verifyFalse(endsWith(exe, ".exe"))
+end
+tc.assertTrue(isfile(exe))
+
+end
+
 function test_with_suffix(tc)
 tc.verifyEqual(matpath.fileio.with_suffix("foo.h5", ".nc"), "foo.nc")
 if ~verLessThan("matlab", "9.9")
